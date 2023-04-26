@@ -9,7 +9,7 @@ export const SavedRecipes = () => {
 
   const removeRecipe = async (recipe) => {
     try {
-      const response = await axios.delete("http://localhost:3001/recipes", {
+      const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/recipes`, {
         data: {
           recipeID: recipe._id,
           userID: userID,
@@ -31,7 +31,7 @@ export const SavedRecipes = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/${userID}`
+          `${process.env.REACT_APP_BACKEND_URL}/recipes/savedRecipes/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
         console.log(response.data);

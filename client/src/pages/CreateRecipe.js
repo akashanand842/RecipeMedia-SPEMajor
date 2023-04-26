@@ -40,7 +40,7 @@ export const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post(
-        "http://localhost:3001/recipes",
+        `${process.env.REACT_APP_BACKEND_URL}/recipes`,
         { ...recipe }
         // ,
         // {
