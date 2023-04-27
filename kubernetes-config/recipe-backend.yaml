@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-backend
+  template:
+    metadata:
+      labels:
+        app: recipe-backend
+    spec:
+      containers:
+        - name: recipe-backend-container
+          image: sam1234gupta/spefinalback
+          ports:
+            - name: http
+              containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recipe-backend-service
+spec:
+  selector:
+    app: recipe-backend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8082
+      targetPort: http

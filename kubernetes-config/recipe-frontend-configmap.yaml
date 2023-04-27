@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recipe-frontend-configmap
+data:
+  REACT_APP_FRONTEND_URL: recipe-frontend-service
+  REACT_APP_BACKEND_URL: recipe-backend-service
