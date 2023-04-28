@@ -29,7 +29,7 @@ kind: Service
 metadata:
   name: recipe-backend-service
 spec:
-  type: LoadBalancer
+  # type: LoadBalancer
   selector:
     app: recipe-backend
   ports:
