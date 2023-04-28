@@ -14,20 +14,27 @@ spec:
     spec:
       containers:
         - name: recipe-backend-container
-          image: sam1234gupta/spefinalback
+          image: akashanand842/recipe-backend
           ports:
             - name: http
               containerPort: 8082
+          env:
+            - name: MONGO_URI
+              value: "mongodb+srv://akash:AkAsh02@recipe-db.35jvkdo.mongodb.net/recipe-db?retryWrites=true&w=majority"
+            - name: PORT
+              value: "8082"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: recipe-backend-service
 spec:
+  type: LoadBalancer
   selector:
     app: recipe-backend
   ports:
     - name: http
       protocol: TCP
       port: 8082
-      targetPort: http
+      targetPort: 8082
+      # nodePort: 30001

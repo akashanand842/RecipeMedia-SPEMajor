@@ -20,7 +20,7 @@ export const ViewRecipe = () => {
     alert(`${e}` + " stars given");
     try{
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes/rate`,{
+        `/api/recipes/rate`,{
           recipeID: recipeID,
           userID: userID,
           rating: e
@@ -45,7 +45,7 @@ export const ViewRecipe = () => {
           comment: comment,
         };
         const response = await axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/comment`,
+          `/api/recipes/comment`,
           cmt
         );
         const comments = [
@@ -59,6 +59,7 @@ export const ViewRecipe = () => {
         console.log(comments);
         setRecipe({ ...recipe, comments });
         console.log(recipe);
+        setComment("")
       } catch (err) {
         console.error(err);
       }
@@ -68,7 +69,7 @@ export const ViewRecipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/get-recipe/${recipeID}`
+          `/api/recipes/get-recipe/${recipeID}`
         );
         console.log(response.data);
         setRecipe(response.data);

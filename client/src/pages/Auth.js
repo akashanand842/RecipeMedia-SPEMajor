@@ -24,7 +24,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
+      const result = await axios.post(`/api/auth/login`, {
         username,
         password,
       });
@@ -59,7 +59,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
+      await axios.post(`/api/auth/register`, {
         username,
         password,
       });

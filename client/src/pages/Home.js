@@ -19,7 +19,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/recipes`);
+        const response = await axios.get(`/api/recipes`);
         const ratedRecipes = response.data.map((recipe) => {
           const ratings = recipe.ratings.map((r) => r.rating);
           const avgRating =
@@ -37,7 +37,7 @@ export const Home = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/savedRecipes/ids/${userID}`
+          `/api/recipes/savedRecipes/ids/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -51,7 +51,7 @@ export const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/recipes`, {
+      const response = await axios.put(`/api/recipes`, {
         recipeID,
         userID,
       });

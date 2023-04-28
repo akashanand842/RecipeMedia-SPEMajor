@@ -6,8 +6,7 @@ metadata:
     name: recipe-ingress
 spec:
   rules:
-    - host: recipe.com
-      http:
+    - http:
         paths:
           - pathType: Prefix
             path: "/"
@@ -22,4 +21,4 @@ spec:
               service:
                 name: recipe-backend-service
                 port:
-                  number: 8081
+                  number: 8082
