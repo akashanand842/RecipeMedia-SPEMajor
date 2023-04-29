@@ -41,11 +41,10 @@ export const CreateRecipe = () => {
     try {
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/recipes`,
-        { ...recipe }
-        // ,
-        // {
-        //   headers: { authorization: cookies.access_token },
-        // }
+        { ...recipe },
+        {
+          headers: { authorization: cookies.access_token },
+        }
       );
 
       alert("Recipe Created");

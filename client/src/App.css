@@ -62,6 +62,12 @@ input {
   text-decoration: none;
 }
 
+.hss{
+  text-align: center;
+  align-items: center;
+  width: 400px;
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -86,16 +92,95 @@ a {
   flex-direction: column;
 }
 ul {
-  /* display: grid;
-  grid-template-columns: repeat(3, 350px);
-  column-gap: 100px; */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  /* divide into 2 columns */
+  gap: 20px;
+  column-gap: 150px;
   list-style: none;
-  padding: 0;
+  padding-left: 90px;
+  padding-right: 150px;
+  padding-top: 50px;
   margin: 0;
+ 
+}
+.hss input{
+  width: 200%;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+
+.save h1{
+  text-align: center;
+}
+
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+  width: 100%;
+  /* position: relative; */
+  /* display: inline-block;
+  margin-right: 20px; */
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* .card button {
+  background-color: #009688;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #388e3c;
+} */
+
+.card1{
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 30px 30px 30px 30px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.gridd1 ul{
+  padding: 0%;
+  width: max-content;
+  margin-left: 1000px;
+  align-items: center;
+}
+/* .comment{
+  padding: 10px;
+  box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.2);
+} */
+.comment li{
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.comment li:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.2);
 }
 
 li {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -117,4 +202,50 @@ img {
 p {
   max-width: 400px;
   font-size: 12px;
+}
+
+.comment-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.comment-form input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.comment-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+  background-color: #3e8e41;
+}
+
+.goBackButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.goBackButton:hover {
+  background-color: #3e8e41;
 }

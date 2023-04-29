@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { BsFillStarFill } from "react-icons/bs";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
+  const [cookies, _] = useCookies(["access_token"]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -15,11 +17,16 @@ export const Home = () => {
       state: { recipeID: recipe_id, page: "/" },
     });
   };
-  
+
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/recipes`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/recipes`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
+        );
         const ratedRecipes = response.data.map((recipe) => {
           const ratings = recipe.ratings.map((r) => r.rating);
           const avgRating =
@@ -37,7 +44,10 @@ export const Home = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/savedRecipes/ids/${userID}`
+          `${process.env.REACT_APP_BACKEND_URL}/recipes/savedRecipes/ids/${userID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -51,10 +61,16 @@ export const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/recipes`, {
-        recipeID,
-        userID,
-      });
+      const response = await axios.put(
+        `${process.env.REACT_APP_BACKEND_URL}/recipes`,
+        {
+          recipeID,
+          userID,
+        },
+        {
+          headers: { authorization: cookies.access_token },
+        }
+      );
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
       console.log(err);
@@ -69,42 +85,53 @@ export const Home = () => {
 
   return (
     <div>
-      <h1>Recipes</h1>
-      <input
-        type="text"
-        placeholder="Search for a recipe..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <ul>
-        {filteredRecipes.map((recipe) => (
-          <li key={recipe._id}>
-            <div>
-              <h2>{recipe.name} </h2>
-              {recipe.avgRating == 0 ? (<>Not Rated</>) : (<>{recipe.avgRating} <BsFillStarFill color="#ffd700"/></>)}
-              <button
-                onClick={() => saveRecipe(recipe._id)}
-                disabled={isRecipeSaved(recipe._id)}
-              >
-                {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-              </button>
-              <button
-                onClick={() => {
-                  goToView(recipe._id);
-                }}
-              >
-                {" "}
-                View{" "}
-              </button>
+      <div className="hss">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search for a recipe..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="gridd">
+        <ul>
+          {filteredRecipes.map((recipe) => (
+            <div className="card">
+              <li key={recipe._id}>
+                <div>
+                  <h2>
+                  {recipe.avgRating == 0 ? (
+                    <></>
+                  ) : (
+                    <>
+                      {recipe.avgRating} <BsFillStarFill color="#ffd700" />
+                    </>
+                  )}
+                  {" "}
+                  {recipe.name} 
+                  </h2>
+                  
+                </div>
+                <img src={recipe.imageUrl} alt={recipe.name} />
+                <button
+                    onClick={() => saveRecipe(recipe._id)}
+                    disabled={isRecipeSaved(recipe._id)}
+                  >
+                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                  </button>
+                  <button
+                    onClick={() => {
+                      goToView(recipe._id);
+                    }}
+                  >
+                    View
+                  </button>
+              </li>
             </div>
-            <div className="instructions">
-              <p>{recipe.instructions}</p>
-            </div>
-            <img src={recipe.imageUrl} alt={recipe.name} />
-            <p>Cooking Time: {recipe.cookingTime} minutes</p>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

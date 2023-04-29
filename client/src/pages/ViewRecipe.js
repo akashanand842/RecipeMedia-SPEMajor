@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { BsFillStarFill } from "react-icons/bs";
@@ -10,6 +11,7 @@ export const ViewRecipe = () => {
   const navigate = useNavigate();
   const recipeID = location.state.recipeID;
   const page = location.state.page;
+  const [cookies, _] = useCookies(["access_token"]);
   const userID = window.localStorage.getItem("userID");
   const [recipe, setRecipe] = useState([]);
   const [comment, setComment] = useState("");
@@ -18,16 +20,19 @@ export const ViewRecipe = () => {
   const handleStars = async (e) => {
     setStar(e);
     alert(`${e}` + " stars given");
-    try{
+    try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes/rate`,{
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/rate`,
+        {
           recipeID: recipeID,
           userID: userID,
-          rating: e
+          rating: e,
+        },
+        {
+          headers: { authorization: cookies.access_token },
         }
       );
-    }
-    catch(err){
+    } catch (err) {
       console.error(err);
     }
   };
@@ -46,7 +51,10 @@ export const ViewRecipe = () => {
         };
         const response = await axios.put(
           `${process.env.REACT_APP_BACKEND_URL}/recipes/comment`,
-          cmt
+          cmt,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         const comments = [
           ...recipe.comments,
@@ -68,7 +76,10 @@ export const ViewRecipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/recipes/get-recipe/${recipeID}`
+          `${process.env.REACT_APP_BACKEND_URL}/recipes/get-recipe/${recipeID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         console.log(response.data);
         setRecipe(response.data);
@@ -97,74 +108,83 @@ export const ViewRecipe = () => {
 
   return (
     <div>
-      <h1>Recipes</h1>
-      <ul>
-        <li key={recipe._id}>
-          <div>
-            <h2>{recipe.name}</h2>
-            <button
-              onClick={() => {
-                goBack();
-              }}
-            >
-              Back
-            </button>
-          </div>
-          <div className="instructions">
-            <h4>Instructions</h4>
-            <p>{recipe.instructions}</p>
-          </div>
-          <img src={recipe.imageUrl} alt={recipe.name} />
-
-          <h4>Ingredients</h4>
-          {recipe.ingredients &&
-            recipe.ingredients.map((ingredient, idx) => (
-              <li key={idx}>{ingredient}</li>
-            ))}
-          <h4>Time</h4>
-          <p>Cooking Time: {recipe.cookingTime} minutes</p>
-          <h4>Comments</h4>
-          {recipe.comments &&
-            recipe.comments.map((comment, idx) => (
-              <li key={idx}>{comment.comment}</li>
-              // <p>
-              //   {idx + 1}. {comment.comment}
-              // </p>
-            ))}
-          <div>
-            <input
-              type="text"
-              onChange={(event, idx) => {
-                setComment(event.target.value);
-              }}
-            />
-            <button
-              onClick={() => {
-                submitComment();
-              }}
-            >
-              Submit
-            </button>
-            {star === 0 ? (
-              <>
-                <h4>Please Rate</h4>
-                <ReactStars
-                  count={5}
-                  onChange={(e) => {
-                    handleStars(e);
+      <div className="gridd1">
+        <ul>
+          <div className="card1">
+            <li key={recipe._id}>
+              <div>
+                {star === 0 ? (
+                  <>
+                    <h2>Please Rate</h2>
+                    <ReactStars
+                      count={5}
+                      onChange={(e) => {
+                        handleStars(e);
+                      }}
+                      size={40}
+                      activeColor="#ffd700"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <h2>
+                      Rated {star} <BsFillStarFill color="#ffd700" />{" "}
+                    </h2>
+                  </>
+                )}
+                <h2>{recipe.name}</h2>
+                <button
+                  className="goBackButton"
+                  onClick={() => {
+                    goBack();
                   }}
-                  size={40}
-                  activeColor="#ffd700"
+                >
+                  Back
+                </button>
+              </div>
+              <div className="instructions">
+                <h4>Instructions</h4>
+                <li>{recipe.instructions}</li>
+              </div>
+              <img src={recipe.imageUrl} alt={recipe.name} />
+
+              <h4>Ingredients</h4>
+              <div className="comment">
+                {recipe.ingredients &&
+                  recipe.ingredients.map((ingredient, idx) => (
+                    <li key={idx}>{ingredient}</li>
+                  ))}
+              </div>
+              <h4>Time</h4>
+              <li>Cooking Time: {recipe.cookingTime} minutes</li>
+              <h4>Comments</h4>
+              <div className="comment">
+                {recipe.comments &&
+                  recipe.comments.map((comment, idx) => (
+                    <li key={idx}>{comment.comment}</li>
+                  ))}
+              </div>
+              <div className="comment-form">
+                <input
+                  type="text"
+                  placeholder="Enter your comment here..."
+                  onChange={(event, idx) => {
+                    setComment(event.target.value);
+                  }}
                 />
-              </>
-            ) : (
-              <>
-                <h3>Rated {star} <BsFillStarFill color="#ffd700"/> </h3>
-              </>
-            )}
+                <button
+                  className="comment-submit-button"
+                  onSubmit={() => {
+                    submitComment();
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+            </li>
           </div>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
   );
 };
