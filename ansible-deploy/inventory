@@ -1,0 +1,2 @@
+[localhost]
+akash ansible_connection=local
