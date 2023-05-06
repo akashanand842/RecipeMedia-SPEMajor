@@ -75,7 +75,7 @@ a {
   font-size: 25px;
 }
 
-.create-recipe {
+/* .create-recipe {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,7 +90,87 @@ a {
 .create-recipe form {
   display: flex;
   flex-direction: column;
+} */
+
+.create-recipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #e7e7e7de;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  width: 500px;
 }
+
+.create-recipe h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.create-recipe form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: black;
+}
+
+.create-recipe label {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.create-recipe input,
+.create-recipe textarea {
+  border: none;
+  border-radius: 5px;
+  border-color: black;
+  padding: 10px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-recipe input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.create-recipe input[type="number"]::-webkit-inner-spin-button,
+.create-recipe input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.create-recipe button[type="submit"],
+.create-recipe button[type="button"] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-recipe button[type="submit"]:hover,
+.create-recipe button[type="button"]:hover {
+  background-color: #3e8e41;
+}
+
+.create-recipe button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
 ul {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -116,7 +196,7 @@ ul {
 
 
 .card {
-  background-color: #fff;
+  background-color: #fafafa;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 30px 30px 30px 30px;
   border-radius: 10px;
@@ -152,7 +232,7 @@ ul {
 
 .card1{
   margin: auto;
-  background-color: #fff;
+  background-color: #646464;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 30px 30px 30px 30px;
   border-radius: 10px;
