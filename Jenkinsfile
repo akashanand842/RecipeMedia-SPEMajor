@@ -48,13 +48,16 @@ pipeline {
 
     stage('Deploy with Ansible') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'user-id', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
-          sh 'echo "AKASH_USER=$SSH_USER"'
-          sh 'echo "AKASH_PASS=$SSH_PASS"'
-          script {
-            ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'ansible-deploy/inventory',
-            playbook: 'ansible-deploy/ansible-book.yml', sudoUser: null
-          }
+        // withCredentials([usernamePassword(credentialsId: 'user-id', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
+        //   sh 'echo "AKASH_USER=$SSH_USER"'
+        //   sh 'echo "AKASH_PASS=$SSH_PASS"'
+        //   script {
+        //     ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'ansible-deploy/inventory',
+        //     playbook: 'ansible-deploy/ansible-book.yml', sudoUser: null
+        //   }
+        // }
+        script{
+          sh 'ansible-playbook ansible-deploy/ansible-book.yml -i ansible-deploy/inventory --user akash --extra-vars "ansible_become_pass=123"'
         }
       }
     }
