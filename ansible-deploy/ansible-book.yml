@@ -1,11 +1,16 @@
 ---
 - name: Deploy recipes app to minikube
   hosts: all
-  become: yes
-  become_user: akash
+  remote_user: akash
   tasks:
-    - name: pull docker image
-      shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
-      
-    - name: running container
-      shell: kubectl apply -f ./../kubernetes-config/recipe-frontend.yaml
+  - name: Clone repository
+    git:
+      repo: https://github.com/akashanand842/RecipeMedia-SPEMajor.git
+      dest: /home/akash/RecipeMedia-SPEMajor
+      version: sameeksha
+
+  - name: pull docker image
+    shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
+
+  - name: running container
+    shell: kubectl apply -f ./../kubernetes-config/recipe-frontend.yaml
