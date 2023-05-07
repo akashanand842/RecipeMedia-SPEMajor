@@ -8,7 +8,9 @@
   #     repo: https://github.com/akashanand842/RecipeMedia-SPEMajor.git
   #     dest: /home/akash/RecipeMedia-SPEMajor
   #     version: sameeksha
-
+  - name: folder
+    shell: ls -l
+    
   - name: pull docker image
     shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
 
