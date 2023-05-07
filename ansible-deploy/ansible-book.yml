@@ -2,6 +2,8 @@
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
+    - name: minikube start
+      shell: minikube start
     - name: pull docker image
       shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
       
