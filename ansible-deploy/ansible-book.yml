@@ -3,14 +3,11 @@
   hosts: all
   remote_user: akash
   tasks:
-  # - name: Clone repository
-  #   git:
-  #     repo: https://github.com/akashanand842/RecipeMedia-SPEMajor.git
-  #     dest: /home/akash/RecipeMedia-SPEMajor
-  #     version: sameeksha
-  - name: folder
-    shell: ls -l
-    
+  - name: Change directory
+    command:
+      chdir: /home/akash/Course/SPE/MajorProject
+      cmd: ls -l
+
   - name: pull docker image
     shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
 
