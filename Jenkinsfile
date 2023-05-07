@@ -48,7 +48,7 @@ pipeline {
 
     stage('Deploy with Ansible') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'user', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
+        withCredentials([usernamePassword(credentialsId: 'user-id', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
           script {
             ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'ansible-deploy/inventory',
             playbook: 'ansible-deploy/ansible-book.yml', sudoUser: null, extraVars: [ansible_ssh_pass: env.SSH_PASS]
