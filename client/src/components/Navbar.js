@@ -9,17 +9,17 @@ export const Navbar = () => {
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.clear();
-    navigate("/auth");
+    navigate("/");
   };
   return (
     <div className="navbar">
-      <Link to="/">Home</Link>
+      <Link to="/home">Home</Link>
       <Link to="/create-recipe">Create Recipe</Link>
       <Link to="/saved-recipes">Saved Recipes</Link>
       {!cookies.access_token ? (
-        <Link to="/auth">Login/Register</Link>
+        <Link to="/">Login/Register</Link>
       ) : (
-        <button onClick={logout}> Logout </button>
+        <button type="button" class="btn btn-secondary btn-lg" style={{width:"100px", height:"30px", fontSize:"large"}} onClick={logout}> Logout </button>
       )}
     </div>
   );

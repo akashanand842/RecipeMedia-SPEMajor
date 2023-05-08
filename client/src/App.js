@@ -13,10 +13,10 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/create-recipe" element={<CreateRecipe />} />
           <Route path="/saved-recipes" element={<SavedRecipes />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<Auth />} />
           <Route path="/view" element={<ViewRecipe />} />
         </Routes>
       </Router>

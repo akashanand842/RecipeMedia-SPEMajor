@@ -12,6 +12,13 @@ body {
   padding: 0;
 }
 
+.auth-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
 .auth {
   display: flex;
   justify-content: center;

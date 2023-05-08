@@ -5,7 +5,7 @@ import { UserModel } from "../models/Users.js";
 import { verifyToken } from "./users.js";
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   try {
     const response = await RecipesModel.find({});
     res.json(response);
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // Create a new recipe  add this later on verifyToken,
-router.post("/",  async (req, res) => {
+router.post("/",  verifyToken, async (req, res) => {
   const recipe = new RecipesModel({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -46,7 +46,7 @@ router.post("/",  async (req, res) => {
 });
 
 // Get a particular recipe
-  router.get("/get-recipe/:recipeID", async (req, res) => {
+  router.get("/get-recipe/:recipeID", verifyToken,async (req, res) => {
     try{
         const recipe = await RecipesModel.findById(req.params.recipeID);
         res.json(recipe);
@@ -57,7 +57,7 @@ router.post("/",  async (req, res) => {
   });
 
 // Save a Recipe
-router.put("/", async (req, res) => {
+router.put("/", verifyToken, async (req, res) => {
   const recipe = await RecipesModel.findById(req.body.recipeID);
   const user = await UserModel.findById(req.body.userID);
   try {
@@ -70,7 +70,7 @@ router.put("/", async (req, res) => {
 });
 
 // Delete a saved recipe
-router.delete("/", async (req, res) => {
+router.delete("/", verifyToken, async (req, res) => {
   const recipeId = req.body.recipeID;
   const userId = req.body.userID;
   
@@ -93,7 +93,7 @@ router.delete("/", async (req, res) => {
 });
 
 // Get id of saved recipes
-router.get("/savedRecipes/ids/:userId", async (req, res) => {
+router.get("/savedRecipes/ids/:userId", verifyToken, async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId);
     res.status(201).json({ savedRecipes: user?.savedRecipes });
@@ -104,7 +104,7 @@ router.get("/savedRecipes/ids/:userId", async (req, res) => {
 });
 
 // Get saved recipes
-router.get("/savedRecipes/:userId", async (req, res) => {
+router.get("/savedRecipes/:userId", verifyToken, async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId);
     const savedRecipes = await RecipesModel.find({
@@ -120,7 +120,7 @@ router.get("/savedRecipes/:userId", async (req, res) => {
 });
 
 //Comment on recipe
-router.put("/comment", async (req, res) => {
+router.put("/comment", verifyToken, async (req, res) => {
   const recipe = await RecipesModel.findById(req.body.recipeID);
   const userObj = await UserModel.findById(req.body.userID);
   const comment = {
@@ -137,7 +137,7 @@ router.put("/comment", async (req, res) => {
 });
 
 //rate a recipe
-router.put("/rate", async (req, res) => {
+router.put("/rate", verifyToken, async (req, res) => {
   const recipe = await RecipesModel.findById(req.body.recipeID);
   const userObj = await UserModel.findById(req.body.userID);
   const rating = {

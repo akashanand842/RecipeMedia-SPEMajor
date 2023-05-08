@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { BsFillStarFill } from "react-icons/bs";
@@ -14,6 +15,7 @@ export const ViewRecipe = () => {
   const [recipe, setRecipe] = useState([]);
   const [comment, setComment] = useState("");
   const [star, setStar] = useState(0);
+  const [cookies, _] = useCookies(["access_token"]);
 
   const handleStars = async (e) => {
     setStar(e);
@@ -24,6 +26,9 @@ export const ViewRecipe = () => {
           recipeID: recipeID,
           userID: userID,
           rating: e
+        },
+        {
+          headers: { authorization: cookies.access_token },
         }
       );
     }
@@ -46,7 +51,10 @@ export const ViewRecipe = () => {
         };
         const response = await axios.put(
           `/api/recipes/comment`,
-          cmt
+          cmt,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         const comments = [
           ...recipe.comments,
@@ -69,7 +77,10 @@ export const ViewRecipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await axios.get(
-          `/api/recipes/get-recipe/${recipeID}`
+          `/api/recipes/get-recipe/${recipeID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         console.log(response.data);
         setRecipe(response.data);

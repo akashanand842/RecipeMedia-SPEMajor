@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export const SavedRecipes = () => {
+  const [cookies, _] = useCookies(["access_token"]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const userID = window.localStorage.getItem("userID");
   const navigate = useNavigate();
 
   const removeRecipe = async (recipe) => {
     try {
-      const response = await axios.delete(`/api/recipes`, {
+      const response = await axios.delete(`/api/recipes`, 
+      {
         data: {
           recipeID: recipe._id,
           userID: userID,
         },
-      });
+        headers: { authorization: cookies.access_token },
+      }
+    );
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {
       console.log(err);
@@ -31,7 +36,10 @@ export const SavedRecipes = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `/api/recipes/savedRecipes/${userID}`
+          `/api/recipes/savedRecipes/${userID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         setSavedRecipes(response.data.savedRecipes);
         console.log(response.data);

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsFillStarFill } from "react-icons/bs";
+import { useCookies } from "react-cookie";
 
 export const Home = () => {
+  const [cookies, _] = useCookies(["access_token"]);
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,14 +14,17 @@ export const Home = () => {
   const goToView = (recipe_id) => {
     console.log(recipe_id);
     navigate("/view", {
-      state: { recipeID: recipe_id, page: "/" },
+      state: { recipeID: recipe_id, page: "/home" },
     });
   };
   
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`/api/recipes`);
+        const response = await axios.get(`/api/recipes`,
+        {
+          headers: { authorization: cookies.access_token },
+        });
         const ratedRecipes = response.data.map((recipe) => {
           const ratings = recipe.ratings.map((r) => r.rating);
           const avgRating =
@@ -37,7 +42,10 @@ export const Home = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `/api/recipes/savedRecipes/ids/${userID}`
+          `/api/recipes/savedRecipes/ids/${userID}`,
+          {
+            headers: { authorization: cookies.access_token },
+          }
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -54,6 +62,9 @@ export const Home = () => {
       const response = await axios.put(`/api/recipes`, {
         recipeID,
         userID,
+      },
+      {
+        headers: { authorization: cookies.access_token },
       });
       setSavedRecipes(response.data.savedRecipes);
     } catch (err) {

@@ -41,15 +41,14 @@ export const CreateRecipe = () => {
     try {
       await axios.post(
         `/api/recipes`,
-        { ...recipe }
-        // ,
-        // {
-        //   headers: { authorization: cookies.access_token },
-        // }
+        { ...recipe },
+        {
+          headers: { authorization: cookies.access_token },
+        }
       );
 
       alert("Recipe Created");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }

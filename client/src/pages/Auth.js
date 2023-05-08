@@ -4,11 +4,52 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 export const Auth = () => {
+  const [flag, setFlag] = useState(true);
   return (
-    <div className="auth">
-      <Login />
-      <Register />
-    </div>
+    <>
+      {/* <div className="auth"> */}
+        <div className="auth-container">
+          <div className="auth-buttons">
+            <button
+              type="button"
+              className="btn btn-primary btn-lg"
+              style={{width:"200px", height:"30px", fontSize:"large"}}
+              onClick={() => {
+                setFlag(true);
+              }}
+            >
+              {" "}
+              Login
+              {"   "}
+            </button>
+            <button
+              type="button"
+              style={{width:"200px", height:"30px", fontSize:"large"}}
+              className="btn btn-primary"
+              onClick={() => {
+                setFlag(false);
+              }}
+            >
+              {" "}
+              Register{" "}
+            </button>
+          </div>
+          {flag ? (
+            <>
+              <Login />
+            </>
+          ) : (
+            <>
+              <Register />
+            </>
+          )}
+        </div>
+      {/* </div> */}
+    </>
+    // <div className="auth">
+    //   <Login />
+    //   <Register />
+    // </div>
   );
 };
 
@@ -31,7 +72,7 @@ const Login = () => {
 
       setCookies("access_token", result.data.token);
       window.localStorage.setItem("userID", result.data.userID);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
@@ -78,12 +119,19 @@ const Register = () => {
       label="Register"
       onSubmit={handleSubmit}
     />
-  )
+  );
 };
 
-const Form = ({ username, setUsername, password, setPassword, label, onSubmit }) => {
+const Form = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  label,
+  onSubmit,
+}) => {
   return (
-    <div className="auth-container">
+    // <div className="auth-container">
       <form onSubmit={onSubmit}>
         <h2>{label}</h2>
         <div className="form-group">
@@ -106,6 +154,6 @@ const Form = ({ username, setUsername, password, setPassword, label, onSubmit })
         </div>
         <button type="submit">{label}</button>
       </form>
-    </div>
+    // </div>
   );
 };
