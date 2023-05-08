@@ -1,7 +1,6 @@
 ---
 - name: Deploy recipes app to minikube
   hosts: all
-  remote_user: akash
   tasks:
   - name: Change directory
     command:
@@ -10,8 +9,11 @@
   - name: show 
     shell: ls -l
 
+  - name: apply secret
+    shell: kubectl apply -f /kubernetes-config/recipe-backend-secret.yaml
+
   - name: pull docker image
-    shell: kubectl apply -f ./../kubernetes-config/recipe-backend.yaml
+    shell: kubectl apply -f /kubernetes-config/recipe-backend.yaml
 
   - name: running container
-    shell: kubectl apply -f ./../kubernetes-config/recipe-frontend.yaml
+    shell: kubectl apply -f /kubernetes-config/recipe-frontend.yaml
