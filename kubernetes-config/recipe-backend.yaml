@@ -19,10 +19,16 @@ spec:
             - name: http
               containerPort: 8082
           env:
-            - name: MONGO_URI
-              value: "mongodb+srv://akash:AkAsh02@recipe-db.35jvkdo.mongodb.net/recipe-db?retryWrites=true&w=majority"
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: recipe-backend-secret
+                  key: MONGODB_URI
             - name: PORT
-              value: "8082"
+              valueFrom:
+                secretKeyRef:
+                  name: recipe-backend-secret
+                  key: PORT
 ---
 apiVersion: v1
 kind: Service
