@@ -2,18 +2,18 @@
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
-  - name: Change directory
-    command:
-      chdir: /home/akash/Course/SPE/MajorProject
-      cmd: ls -l
-  - name: show 
-    shell: cat /kubernetes-config/recipe-backend-secret.yaml
+  # - name: Change directory
+  #   command:
+  #     chdir: /home/akash/Course/SPE/MajorProject
+  #     cmd: ls -l
+  # - name: show 
+  #   shell: cat /kubernetes-config/recipe-backend-secret.yaml
 
   - name: apply secret
-    shell: kubectl apply -f /kubernetes-config/recipe-backend-secret.yaml
+    shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-backend-secret.yaml
 
   - name: pull docker image
-    shell: kubectl apply -f /kubernetes-config/recipe-backend.yaml
+    shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-backend.yaml
 
   - name: running container
-    shell: kubectl apply -f /kubernetes-config/recipe-frontend.yaml
+    shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-frontend.yaml
