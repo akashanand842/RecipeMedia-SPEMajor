@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: recipe-frontend
-          image: akashanand842/recipe-frontend:v5
+          image: akashanand842/recipe-frontend
           ports:
             - containerPort: 2004
 ---

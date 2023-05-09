@@ -3,13 +3,17 @@ import mongoose from "mongoose";
 import { RecipesModel } from "../models/Recipes.js";
 import { UserModel } from "../models/Users.js";
 import { verifyToken } from "./users.js";
+import logger from "../../logging.js";
 const router = express.Router();
 
 router.get("/", verifyToken, async (req, res) => {
   try {
     const response = await RecipesModel.find({});
+    //logger
+    logger.info(`All Recipes returned`);
     res.json(response);
   } catch (err) {
+    logger.error(err);
     res.json(err);
   }
 });
@@ -29,6 +33,8 @@ router.post("/",  verifyToken, async (req, res) => {
   console.log(recipe);
 
   try {
+    //logger
+    logger.info(`New Recipe added`);
     const result = await recipe.save();
     res.status(201).json({
       createdRecipe: {
@@ -40,6 +46,7 @@ router.post("/",  verifyToken, async (req, res) => {
       },
     });
   } catch (err) {
+    logger.error(err); 
     // console.log(err);
     res.status(500).json(err);
   }
@@ -49,9 +56,13 @@ router.post("/",  verifyToken, async (req, res) => {
   router.get("/get-recipe/:recipeID", verifyToken,async (req, res) => {
     try{
         const recipe = await RecipesModel.findById(req.params.recipeID);
+        //logger
+        logger.info(`Recipe retrned: `, req.params.recipeID);
         res.json(recipe);
     }
     catch(err){
+        //logger
+        logger.error(err);
         res.json(err);
     }
   });
@@ -62,9 +73,13 @@ router.put("/", verifyToken, async (req, res) => {
   const user = await UserModel.findById(req.body.userID);
   try {
     user.savedRecipes.push(recipe);
+    //logger
+    logger.info(`Recipe (${recipe._id}) saved for user: `, user._id);
     await user.save();
     res.status(201).json({ savedRecipes: user.savedRecipes });
   } catch (err) {
+    //logger
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -83,11 +98,14 @@ router.delete("/", verifyToken, async (req, res) => {
       const savedRecipes = await RecipesModel.find({
         _id: { $in: user.savedRecipes },
       });
+      //logger
+      logger.info(`Recipe deleted from the user`);
       res.status(200).json({ savedRecipes });
     } else {
       res.status(404).json({ message: "Recipe not found" });
     }
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -96,6 +114,8 @@ router.delete("/", verifyToken, async (req, res) => {
 router.get("/savedRecipes/ids/:userId", verifyToken, async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId);
+    //logger
+    logger.info(`Recipes returned saved for the user`);
     res.status(201).json({ savedRecipes: user?.savedRecipes });
   } catch (err) {
     console.log(err);
@@ -112,6 +132,8 @@ router.get("/savedRecipes/:userId", verifyToken, async (req, res) => {
     });
 
     console.log(savedRecipes);
+    //logger
+    logger.info(`Recipes retrned saved for the user`);
     res.status(201).json({ savedRecipes });
   } catch (err) {
     console.log(err);
@@ -129,9 +151,12 @@ router.put("/comment", verifyToken, async (req, res) => {
   };
   try {
     recipe.comments.push(comment);
+    //logger
+    logger.info(`Comment added for the recipe`);
     await recipe.save();
     res.status(201).json({ recipe: recipe });
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
@@ -146,9 +171,12 @@ router.put("/rate", verifyToken, async (req, res) => {
   };
   try {
     recipe.ratings.push(rating);
+    //logger
+    logger.info(`Rated the recipe`);
     await recipe.save();
     res.status(201).json({ recipe: recipe });
   } catch (err) {
+    logger.error(err);
     res.status(500).json(err);
   }
 });
