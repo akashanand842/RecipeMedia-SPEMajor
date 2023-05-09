@@ -12,8 +12,8 @@
   - name: apply secret
     shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-backend-secret.yaml
 
-  - name: pull docker image
+  - name: apply backend
     shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-backend.yaml
 
-  - name: running container
+  - name: apply frontend
     shell: kubectl apply -f /home/akash/Course/SPE/MajorProject/kubernetes-config/recipe-frontend.yaml
