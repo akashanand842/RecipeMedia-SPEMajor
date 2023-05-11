@@ -2,19 +2,21 @@
 - name: Deploy recipes app to Kubernetes
   hosts: localhost
   gather_facts: no
+  collections:
+    - kubernetes.core
   tasks:
     - name: Apply secret
-      kubernetes:
+      kubernetes.core.kubernetes:
         state: present
         src: /var/lib/jenkins/workspace/recipe-app/kubernetes-config/recipe-backend-secret.yaml
 
     - name: Apply backend deployment
-      kubernetes:
+      kubernetes.core.kubernetes:
         state: present
         src: /var/lib/jenkins/workspace/recipe-app/kubernetes-config/recipe-backend.yaml
 
     - name: Apply frontend deployment
-      kubernetes:
+      kubernetes.core.kubernetes:
         state: present
         src: /var/lib/jenkins/workspace/recipe-app/kubernetes-config/recipe-frontend.yaml
 # - name: Deploy recipes app to minikube
