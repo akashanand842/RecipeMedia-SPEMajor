@@ -23,7 +23,7 @@ pipeline {
             // sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}'
             // sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
             IMAGE_NAME=docker.build "akashanand842/recipe-frontend"
-            docker.withRegistry('','secret-key'){
+            docker.withRegistry('','dockerhub'){
                 IMAGE_NAME.push()
             }
           }
@@ -42,7 +42,7 @@ pipeline {
             // sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}'
             // sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
             IMAGE_NAME=docker.build "akashanand842/recipe-backend"
-            docker.withRegistry('','secret-key'){
+            docker.withRegistry('','dockerhub'){
                 IMAGE_NAME.push()
             }
           }
