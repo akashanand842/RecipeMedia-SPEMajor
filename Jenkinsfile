@@ -1,10 +1,9 @@
 pipeline {
 
-    environment{
-            DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-    	}
+   
     environment {
-    ANSIBLE_COLLECTIONS = 'community.kubernetes'
+         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+         ANSIBLE_COLLECTIONS = 'community.kubernetes'
   }
   agent any
 
