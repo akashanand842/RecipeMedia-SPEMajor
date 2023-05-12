@@ -1,10 +1,4 @@
 pipeline {
-
-   
-    environment {
-         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-      
-  }
   agent any
 
   stages {
@@ -25,7 +19,7 @@ pipeline {
             // sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}'
             // sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
             IMAGE_NAME=docker.build "akashanand842/recipe-frontend"
-            docker.withRegistry('','dockerhub'){
+            docker.withRegistry('','docker-key'){
                 IMAGE_NAME.push()
             }
           }
@@ -44,7 +38,7 @@ pipeline {
             // sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}'
             // sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
             IMAGE_NAME=docker.build "akashanand842/recipe-backend"
-            docker.withRegistry('','dockerhub'){
+            docker.withRegistry('','docker-key'){
                 IMAGE_NAME.push()
             }
           }
@@ -54,17 +48,9 @@ pipeline {
 
     stage('Deploy with Ansible') {
       steps {
-        // withCredentials([usernamePassword(credentialsId: 'user-id', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
-        //   sh 'echo "AKASH_USER=$SSH_USER"'
-        //   sh 'echo "AKASH_PASS=$SSH_PASS"'
-        //   script {
-        //     ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'ansible-deploy/inventory',
-        //     playbook: 'ansible-deploy/ansible-book.yml', sudoUser: null
-        //   }
-        // }
-        script{
-           //sh 'ansible-galaxy collection install community.kubernetes'
-          sh 'ansible-playbook ansible-deploy/ansible-book.yml -i ansible-deploy/inventory'
+        script {
+            ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'ansible-deploy/inventory',
+            playbook: 'ansible-deploy/ansible-book.yml', sudoUser: null
         }
       }
     }
