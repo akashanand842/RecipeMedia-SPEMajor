@@ -24,4 +24,3 @@ mongoose.connect(
 );
 console.log(process.env.PORT);
 app.listen(process.env.PORT, () => console.log("Server started"));
-export default app;
