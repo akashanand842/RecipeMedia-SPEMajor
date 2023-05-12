@@ -22,10 +22,10 @@
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
-  - name: Start minikube service
-     service:
-       name: minikube
-       state: started
+#   - name: Start minikube service
+#      service:
+#        name: minikube
+#        state: started
 
   # - name: Change directory
   #   command:
