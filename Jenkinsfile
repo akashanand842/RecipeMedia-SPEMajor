@@ -64,7 +64,7 @@ pipeline {
         // }
         script{
            //sh 'ansible-galaxy collection install community.kubernetes'
-          sh 'ansible-playbook ansible-deploy/ansible-book.yml -i ansible-deploy/inventory --user akash --extra-vars "ansible_become_pass=123"'
+          sh 'ansible-playbook ansible-deploy/ansible-book.yml -i ansible-deploy/inventory'
         }
       }
     }
