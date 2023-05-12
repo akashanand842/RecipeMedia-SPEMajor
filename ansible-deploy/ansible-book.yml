@@ -22,12 +22,22 @@
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
+  - name: Start minikube service
+     service:
+       name: minikube
+       state: started
+
   # - name: Change directory
   #   command:
   #     chdir: /home/akash/Course/SPE/MajorProject
   #     cmd: ls -l
   # - name: show 
   #   shell: cat /kubernetes-config/recipe-backend-secret.yaml
+  # tasks:
+#    - name: Start minikube service
+#      service:
+#        name: minikube
+#        state: started
 
   - name: apply secret
     shell: kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml
