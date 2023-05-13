@@ -54,3 +54,6 @@
 {"level":"info","message":"All Recipes returned","timestamp":"2023-05-13T05:11:06.358Z"}
 {"level":"info","message":"User added: {\"username\":\"testuser\",\"password\":\"$2b$10$ZMt/1/jxUqo/UGDVTFWNreO5dUrgWyr/gfFU3u6s3tCKPXpco4sxy\",\"savedRecipes\":[],\"_id\":\"645f1bea2a6603900f25a71f\"}","timestamp":"2023-05-13T05:11:06.842Z"}
 {"level":"info","message":"User logged in :","timestamp":"2023-05-13T05:11:07.483Z"}
+{"level":"info","message":"All Recipes returned","timestamp":"2023-05-13T19:12:27.958Z"}
+{"level":"info","message":"User added: {\"username\":\"testuser\",\"password\":\"$2b$10$z/.0T9r584QQojc7Nd/F8uE1DiFGXWFYvH3LOS5S5Ju0Y4USDGeG6\",\"savedRecipes\":[],\"_id\":\"645fe11cb24bcbdaaea163e3\"}","timestamp":"2023-05-13T19:12:28.401Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T19:12:29.092Z"}
