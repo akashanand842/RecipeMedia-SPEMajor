@@ -18,6 +18,18 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/testrecipe", async (req, res) => {
+  try {
+    const response = await RecipesModel.find({});
+    //logger
+    logger.info(`All Recipes returned`);
+    res.json(response);
+  } catch (err) {
+    logger.error(err);
+    res.json(err);
+  }
+});
+
 // Create a new recipe  add this later on verifyToken,
 router.post("/",  verifyToken, async (req, res) => {
   const recipe = new RecipesModel({

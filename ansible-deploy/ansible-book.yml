@@ -1,43 +1,15 @@
 ---
-# - name: Deploy recipes app to Kubernetes
-#   hosts: localhost
-#   gather_facts: no
-#   collections:
-#     - kubernetes.core
-#   tasks:
-#     - name: Apply secret
-#       kubernetes.core.kubernetes:
-#         state: present
-#         src: ../kubernetes-config/recipe-backend-secret.yaml
-
-#     - name: Apply backend deployment
-#       kubernetes.core.kubernetes:
-#         state: present
-#         src: ../kubernetes-config/recipe-backend.yaml
-
-#     - name: Apply frontend deployment
-#       kubernetes.core.kubernetes:
-#         state: present
-#         src: /var/lib/jenkins/workspace/recipe-app/kubernetes-config/recipe-frontend.yaml
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
-#   - name: Start minikube service
-#      service:
-#        name: minikube
-#        state: started
+  - name: delete previous frontend deployment
+    shell: kubectl apply -f ../kubernetes-config/recipe-frontend.yaml
 
-  # - name: Change directory
-  #   command:
-  #     chdir: /home/akash/Course/SPE/MajorProject
-  #     cmd: ls -l
-  # - name: show 
-  #   shell: cat /kubernetes-config/recipe-backend-secret.yaml
-  # tasks:
-#    - name: Start minikube service
-#      service:
-#        name: minikube
-#        state: started
+  - name: delete previous backend deployment
+    shell: kubectl apply -f ../kubernetes-config/recipe-backend.yaml
+
+  - name: delete previous secret
+    shell: kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml
 
   - name: apply secret
     shell: kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml

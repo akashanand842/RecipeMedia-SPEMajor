@@ -30,3 +30,27 @@
 {"level":"info","message":"User logged in :","timestamp":"2023-05-09T13:17:23.596Z"}
 {"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$SEV6N3jea31hl68ukB36b.CY3P53cAG8vzXtS8E7zS.vkDK7suyaO\",\"savedRecipes\":[],\"_id\":\"645a47e4c8a5be58be4e1e74\"}","timestamp":"2023-05-09T13:17:24.023Z"}
 {"level":"info","message":"User logged in :","timestamp":"2023-05-09T13:17:24.644Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:21:56.502Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$O9Ew9sFRpGYUbqvMbiS16Oz8gDeV6IcgX9x1Nz91Ic1uEsOXAH/YG\",\"savedRecipes\":[],\"_id\":\"645ef4442d44c22bc731ecf6\"}","timestamp":"2023-05-13T02:21:56.894Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:21:57.526Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:25:10.340Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$G.g2.8HNdBBEVvPogtCVDekNxT.alA8CdXd4E01DMY6KFPuG2Pqha\",\"savedRecipes\":[],\"_id\":\"645ef506931079d7e9f7aca4\"}","timestamp":"2023-05-13T02:25:10.727Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:25:11.355Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:35:16.193Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$GS66AmeULCUG2b7LKttvnuUt08DLCNXU5b77iC3GsLNx1poJT5eii\",\"savedRecipes\":[],\"_id\":\"645ef764bb45ca609c739ed0\"}","timestamp":"2023-05-13T02:35:16.570Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:35:17.172Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:46:03.239Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$oE1Vbjo5CwAWsdG4cvtH6ej5.GNvno5tB6YpAEjzv1LRix3yqoyra\",\"savedRecipes\":[],\"_id\":\"645ef9eb1756c560a49b517e\"}","timestamp":"2023-05-13T02:46:03.646Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:46:04.234Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$HTdk.ZLSS7H47w01tuuUeu3btLPmhpvZu8LKx5IFFK31N5fOmLLLW\",\"savedRecipes\":[],\"_id\":\"645efce4460833ef6064c1ba\"}","timestamp":"2023-05-13T02:58:44.657Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T02:58:45.234Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$2zy7D3LIWPse6Or7ScYID.SnQEi66vzFs4RykX1d37CUsbwVj8aUi\",\"savedRecipes\":[],\"_id\":\"645efd3569fc87acb811fed1\"}","timestamp":"2023-05-13T03:00:05.100Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T03:00:05.724Z"}
+{"level":"info","message":"All Recipes returned","timestamp":"2023-05-13T05:08:45.176Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T05:08:45.840Z"}
+{"level":"info","message":"All Recipes returned","timestamp":"2023-05-13T05:09:45.523Z"}
+{"level":"info","message":"User added: {\"username\":\"udd\",\"password\":\"$2b$10$Q5iL8pGjL1J8639hXE7xw.NhiPhRzSZjulwQjksA8xjfnG5/0JwKW\",\"savedRecipes\":[],\"_id\":\"645f1b993c9dc903950b5218\"}","timestamp":"2023-05-13T05:09:45.935Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T05:09:46.752Z"}
+{"level":"info","message":"All Recipes returned","timestamp":"2023-05-13T05:11:06.358Z"}
+{"level":"info","message":"User added: {\"username\":\"testuser\",\"password\":\"$2b$10$ZMt/1/jxUqo/UGDVTFWNreO5dUrgWyr/gfFU3u6s3tCKPXpco4sxy\",\"savedRecipes\":[],\"_id\":\"645f1bea2a6603900f25a71f\"}","timestamp":"2023-05-13T05:11:06.842Z"}
+{"level":"info","message":"User logged in :","timestamp":"2023-05-13T05:11:07.483Z"}

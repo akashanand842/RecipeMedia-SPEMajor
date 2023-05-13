@@ -27,6 +27,16 @@ pipeline {
       }
     }
 
+    stage('Testing backend') {
+      steps {
+        dir('server') {
+          script {
+            sh 'npm test'
+          }
+        }
+      }
+    }
+
     stage('Build and Push Backend Image') {
       environment {
         IMAGE_NAME = ''
@@ -34,9 +44,6 @@ pipeline {
       steps {
         dir('server') {
           script {
-            // sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
-            // sh 'docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}'
-            // sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
             IMAGE_NAME=docker.build "akashanand842/recipe-backend"
             docker.withRegistry('','docker-key'){
                 IMAGE_NAME.push()

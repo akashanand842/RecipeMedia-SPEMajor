@@ -27,7 +27,7 @@ describe('User API Tests', () => {
         chai.request(app)
         .post('/api/auth/register')
         .send({
-            'username': "udd",
+            'username': "testuser",
             'password': "123"
         })
         .end((err, res) => {
