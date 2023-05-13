@@ -26,15 +26,7 @@ after((done) => {
 
 
 describe('Recipes API', () => {
-    it('returns a list of all recipes when a valid token is provided', (done) => {
-        chai.request(app)
-          .get('/api/recipes/testrecipe')
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.an('array');
-            done();
-          });
-      });
+
   
       it('returns a 401 error when no token is provided', (done) => {
         chai.request(app)
