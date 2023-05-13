@@ -27,17 +27,7 @@ pipeline {
       }
     }
 
-    stage('Testing backend') {
-      steps {
-        dir('server') {
-          script {
-            sh 'npm test'
-          }
-        }
-      }
-    }
-
-    stage('Build and Push Backend Image') {
+    stage('Build, Test and Push Backend Image') {
       environment {
         IMAGE_NAME = ''
       }

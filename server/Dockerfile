@@ -1,3 +1,4 @@
+# Use the base image with Node.js installed
 FROM node:14-alpine
 
 # Set the working directory to /backend
@@ -11,6 +12,9 @@ RUN npm install
 
 # Copy the rest of the backend code to the container
 COPY . .
+
+# Run tests during the build process
+RUN npm test
 
 # Expose the port that the application will run on
 EXPOSE 8082
