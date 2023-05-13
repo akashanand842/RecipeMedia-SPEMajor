@@ -2,14 +2,14 @@
 - name: Deploy recipes app to minikube
   hosts: all
   tasks:
-  - name: delete previous frontend deployment
-    shell: kubectl delete -f ../kubernetes-config/recipe-frontend.yaml
+  # - name: delete previous frontend deployment
+  #   shell: kubectl delete -f ../kubernetes-config/recipe-frontend.yaml
 
-  - name: delete previous backend deployment
-    shell: kubectl delete -f ../kubernetes-config/recipe-backend.yaml
+  # - name: delete previous backend deployment
+  #   shell: kubectl delete -f ../kubernetes-config/recipe-backend.yaml
 
-  - name: delete previous secret
-    shell: kubectl delete -f ../kubernetes-config/recipe-backend-secret.yaml
+  # - name: delete previous secret
+  #   shell: kubectl delete -f ../kubernetes-config/recipe-backend-secret.yaml
 
   - name: apply secret
     shell: kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml
