@@ -29,6 +29,14 @@ spec:
                 secretKeyRef:
                   name: recipe-backend-secret
                   key: PORT
+          volumeMounts:
+            - name: backend-logs
+              mountPath: /home/akash/majorproj-volume
+      volumes:  # Add this section for defining the PersistentVolumeClaim
+        - name: backend-logs
+          persistentVolumeClaim:
+            claimName: recipe-volume-claim  # Replace with the name of your PersistentVolumeClaim
+
 ---
 apiVersion: v1
 kind: Service
