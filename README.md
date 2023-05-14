@@ -1,1 +1,2 @@
 # RecipeMedia-SPEMajor
+Added readme
