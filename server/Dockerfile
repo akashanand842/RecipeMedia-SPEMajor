@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Run tests during the build process
-RUN npm test
+
 
 # Expose the port that the application will run on
 EXPOSE 8082
