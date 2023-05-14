@@ -10,14 +10,21 @@ import app from '../src/index.js';
 
 chai.use(chaiHttp);
 
+let userID;
+
 before((done) => {
     // anything to be done before tests
     done();
 });
 
-after((done) => {
+after(async () => {
     // anything to be done after tests
-    done();
+    try {
+        await UserModel.findByIdAndDelete(userID);
+        console.log('done');
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 
@@ -32,7 +39,8 @@ describe('User API Tests', () => {
         })
         .end((err, res) => {
             res.should.have.status(200);
-            if (err) console.log('Unable to login test user: ', err);
+            userID = res.body.userID;
+            if (err) console.log('Unable to register test user: ', err);
             done();
         });
     });

@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
   logger.info(`User added: ${JSON.stringify(newUser)}`);
 
   await newUser.save();
-  res.json({ message: "User registered successfully" });
+  res.json({ message: "User registered successfully", userID: newUser._id});
 });
 
 router.post("/login", async (req, res) => {
