@@ -12,10 +12,10 @@
 #     shell: kubectl delete -f ../kubernetes-config/recipe-backend-secret.yaml
 
   - name: apply secret
-    shell: sudo kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml
+    shell: kubectl apply -f ../kubernetes-config/recipe-backend-secret.yaml
 
   - name: apply backend
-    shell: sudo kubectl apply -f ../kubernetes-config/recipe-backend.yaml
+    shell: kubectl apply -f ../kubernetes-config/recipe-backend.yaml
 
   - name: apply frontend
-    shell: sudo kubectl apply -f ../kubernetes-config/recipe-frontend.yaml
+    shell: kubectl apply -f ../kubernetes-config/recipe-frontend.yaml
